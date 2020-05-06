@@ -25,6 +25,12 @@
     "multi-app-e2e": {
       "tags": [],
       "implicitDependencies": ["multi-app"]
+    },
+    "shared": {
+      "tags": ["shared"]
+    },
+    "people": {
+      "tags": []
     }
   }
 }

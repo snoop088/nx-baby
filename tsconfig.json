@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@se/shared": ["libs/shared/src/index.ts"],
+      "@se/people": ["libs/people/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

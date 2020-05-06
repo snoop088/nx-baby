@@ -1,0 +1,4 @@
+<p>people works!</p>
+<div *ngIf="people | async as ppl">
+    <div *ngFor="let person of ppl">{{ person.firstName + ' ' + person.lastName }}</div>
+</div>
