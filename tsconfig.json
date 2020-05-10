@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@se/shared": ["libs/shared/src/index.ts"],
-      "@se/people": ["libs/people/src/index.ts"]
+      "@se/people": ["libs/people/src/index.ts"],
+      "@se/pets": ["libs/pets/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

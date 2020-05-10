@@ -5,7 +5,19 @@ import { Component, Inject, forwardRef, Optional, InjectionToken } from '@angula
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'multi-app';
+  showDyna = false;
+  data = null;
   constructor() {
   }
-  title = 'multi-app';
+  
+  loadDynaData() {
+    return {
+      module: {
+        name: 'pets',
+        path: 'pets/src/lib'
+      }
+    }
+  }
+  
 }

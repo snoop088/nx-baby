@@ -1,6 +1,10 @@
 <div>
   Hi there {{ title }}
 </div>
+<button type="button" [routerLink]="['/']">Home</button>
 <button type="button" [routerLink]="['people']">Load People</button>
-<button type="button" [routerLink]="['dynamic']">Load Component</button>
+<button type="button" (click)="data = loadDynaData()">Load Component</button>
 <router-outlet></router-outlet>
+<ng-container *ngIf="data">
+  <se-dyna-loader [data]="data"></se-dyna-loader>
+</ng-container>
