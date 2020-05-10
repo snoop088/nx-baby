@@ -1,7 +1,6 @@
 import { Component, OnInit, Injector, ɵcreateInjector as createInjector, Input, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { DynaData } from '../interfaces/dyna-data';
 import { DynaModule } from '../interfaces/dyna-module';
-// import { } from '../../../../pets/src/lib/pets.module'
 @Component({
   selector: 'se-dyna-loader',
   templateUrl: './dyna-loader.component.html',
