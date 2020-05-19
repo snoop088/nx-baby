@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, ɵcreateInjector as createInjector, Input, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Injector, ɵcreateInjector as createInjector, Input, ViewChild, ViewContainerRef, AfterViewInit, Inject, Compiler, NgModule } from '@angular/core';
 import { DynaData } from '../interfaces/dyna-data';
 import { DynaModule } from '../interfaces/dyna-module';
 @Component({
@@ -10,14 +10,18 @@ export class DynaLoaderComponent implements OnInit, AfterViewInit {
 
   @Input() data: DynaData;
   @ViewChild('viewContainer', { read: ViewContainerRef }) viewContainer: ViewContainerRef;
-
-  constructor(private injector: Injector) { }
+  @ViewChild('viewCompiled', { read: ViewContainerRef }) viewCompiled: ViewContainerRef;
+  constructor(
+    private injector: Injector,
+    @Inject(Compiler) private compiler: Compiler
+  ) { }
 
   ngOnInit(): void {
   }
   ngAfterViewInit(): void {
     if (this.data) {
       this.createComponentFromModule(this.data.module.name, this.data.module.path);
+
     }
   }
   private createComponentFromModule(name: string, path: string) {
@@ -27,7 +31,26 @@ export class DynaLoaderComponent implements OnInit, AfterViewInit {
       const dynaModule: DynaModule<any> = createInjector(cmp[cap + 'Module'], this.injector).get(cmp[cap + 'Module']);
       const factory = dynaModule.resolveDynaComponentFactory();
       const compRef = this.viewContainer.createComponent(factory);
+      this.compileFromFactory(dynaModule);
     });
+  }
+  private compileFromFactory(dynaModule: DynaModule<any>) {
+    console.log(this.compiler);
+    const dynaComponentClass = Component({
+      template: '<p>this is my template here</p>{{ fromCmp }}',
+      styles: ['p { color: red }']
+    })(class Comp extends dynaModule.resolveDynaComponentFactory().componentType { })
+    const dynaComponentModule = NgModule({ declarations: [dynaComponentClass] })(class {
+    });
+    this.compiler.compileModuleAndAllComponentsAsync(dynaComponentModule)
+    .then((factories) => {
+      const f = factories.componentFactories[0];
+      const cmpRef = this.viewCompiled.createComponent(f);
+    })
+
+  }
+  private loadWithSystem() {
+    
   }
 
 }

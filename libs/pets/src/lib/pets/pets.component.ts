@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pets.component.css']
 })
 export class PetsComponent implements OnInit {
-
+  fromCmp = 'wow?';
   constructor() { }
 
   ngOnInit(): void {
